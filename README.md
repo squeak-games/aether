@@ -73,13 +73,15 @@ The audio module requires the Android NDK to compile the C++ synthesis layer. Ot
 
 Aether has no network client. There is no HTTP stack, no analytics SDK, no cloud sync layer. This is enforced by construction: the dependency graph contains no remote I/O libraries. Privacy is a property of the architecture, not a promise made in a policy document.
 
-See `docs/PRIVACY.md` for the full model.
+See `docs/PRIVACY.md` (local reference) for the full model.
 
-## Documentation
+## Documentation (local reference)
 
-- [`docs/PRD.md`](docs/PRD.md) — Product Requirements Document for Aether
-- [`docs/PRIVACY.md`](docs/PRIVACY.md) — Privacy architecture
-- [`docs/CATALYST.md`](docs/CATALYST.md) — Catalyst submission traceability (deck claim to file mapping)
+- `docs/PRD.md` — Product Requirements Document for Aether
+- `docs/PRIVACY.md` — Privacy architecture
+- `docs/CATALYST.md` — Catalyst submission traceability
+
+These documents live in `docs/` and are not version‑controlled per repo policy.
 
 ## License
 
@@ -87,7 +89,11 @@ Apache 2.0. See [LICENSE](LICENSE).
 
 ## Status
 
-Under active development. Aether is open-sourced in good faith as part of the Android XR Developer Catalyst Program submission. The repos that consume Aether (`wyldore-hushwild`, `wyldore-stillgrove`) are the product surfaces. Aether is the platform they stand on.
+Multi-module scaffold compiling. Tagged `v0.0.1-scaffold`.
+Future milestones tracked in `docs/TIMELINE.md`. Aether is the platform;
+[`wyldore-spatial-engine`](https://github.com/squeak-games/wyldore-spatial-engine)
+and [`wyldore-stillgrove`](https://github.com/squeak-games/wyldore-stillgrove)
+are the product surfaces.
 
 ---
 
