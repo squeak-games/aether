@@ -19,3 +19,10 @@ target_compile_features(
     PUBLIC
     cxx_std_17
 )
+
+find_package(oboe REQUIRED CONFIG)
+target_link_libraries(
+    aether-audio
+    oboe::oboe
+    log
+)

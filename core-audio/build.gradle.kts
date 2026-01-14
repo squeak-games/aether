@@ -27,6 +27,8 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
 
+    buildFeatures { prefab = true }
+
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
@@ -38,4 +40,8 @@ android {
 dependencies {
     implementation(project(":core-model"))
     implementation(libs.coroutines.core)
+    implementation(libs.oboe)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.coroutines.test)
 }

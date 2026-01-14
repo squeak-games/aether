@@ -26,6 +26,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
+oboe = { group = "com.google.oboe", name = "oboe", version = "1.9.0" }
+
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.9.0" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
