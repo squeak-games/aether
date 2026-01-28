@@ -37,4 +37,18 @@ class AetherAudioEngineTest {
         assertEquals(2f, source.y, 0.001f)
         assertEquals(-3f, source.z, 0.001f)
     }
+
+    @Test
+    fun ringBuffer_returnsZeroSize_whenNativeNotLoaded() {
+        val engine = AetherAudioEngine()
+        assumeTrue("native library loaded, test not applicable", !engine.isNativeLoaded())
+        assertEquals(0, engine.ringBufferSize())
+    }
+
+    @Test
+    fun pushCommand_returnsFalse_whenNativeNotLoaded() {
+        val engine = AetherAudioEngine()
+        assumeTrue("native library loaded, test not applicable", !engine.isNativeLoaded())
+        assertEquals(false, engine.pushCommand(1, 440f))
+    }
 }

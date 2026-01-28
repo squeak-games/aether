@@ -29,6 +29,21 @@ class AetherAudioEngine {
 
     fun getVersion(): String = nativeGetVersion()
 
+    fun pushCommand(command: Int, value: Float): Boolean {
+        if (!nativeLoaded) return false
+        return nativePushCommand(command, value)
+    }
+
+    fun popCommand(): FloatArray? {
+        if (!nativeLoaded) return null
+        return nativePopCommand()
+    }
+
+    fun ringBufferSize(): Int {
+        if (!nativeLoaded) return 0
+        return nativeRingBufferSize()
+    }
+
     companion object {
         private var nativeLoaded = false
         init {
@@ -46,6 +61,9 @@ class AetherAudioEngine {
     private external fun nativeSetFrequency(hz: Float)
     private external fun nativeGetFrequency(): Float
     private external fun nativeGetVersion(): String
+    private external fun nativePushCommand(command: Int, value: Float): Boolean
+    private external fun nativePopCommand(): FloatArray?
+    private external fun nativeRingBufferSize(): Int
 
     fun isNativeLoaded(): Boolean = nativeLoaded
 }

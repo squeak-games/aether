@@ -6,6 +6,7 @@ add_library(
     aether-audio
     SHARED
     audio_engine.cpp
+    RingBuffer.cpp
 )
 
 target_include_directories(

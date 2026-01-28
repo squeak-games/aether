@@ -1,6 +1,10 @@
 #include <oboe/Oboe.h>
 #include <jni.h>
 #include <cmath>
+#include "RingBuffer.h"
+
+static constexpr int kRingBufferCapacity = 64;
+static RingBuffer* gCommandBuffer = new RingBuffer(kRingBufferCapacity);
 
 class SineOscillator : public oboe::AudioStreamDataCallback {
 public:
@@ -107,4 +111,35 @@ Java_com_squeakgames_aether_audio_AetherAudioEngine_nativeGetVersion(
     JNIEnv* env,
     jobject /* thiz */) {
     return env->NewStringUTF("0.0.2-audio-prototype");
+}
+
+extern "C" JNIEXPORT jboolean JNICALL
+Java_com_squeakgames_aether_audio_AetherAudioEngine_nativePushCommand(
+    JNIEnv* /* env */,
+    jobject /* thiz */,
+    jint command,
+    jfloat value) {
+    RingBufferEntry entry{command, value};
+    return gCommandBuffer->push(entry) ? JNI_TRUE : JNI_FALSE;
+}
+
+extern "C" JNIEXPORT jfloatArray JNICALL
+Java_com_squeakgames_aether_audio_AetherAudioEngine_nativePopCommand(
+    JNIEnv* env,
+    jobject /* thiz */) {
+    RingBufferEntry entry;
+    if (!gCommandBuffer->pop(entry)) {
+        return nullptr;
+    }
+    jfloatArray result = env->NewFloatArray(2);
+    jfloat values[2] = {static_cast<jfloat>(entry.command), entry.value};
+    env->SetFloatArrayRegion(result, 0, 2, values);
+    return result;
+}
+
+extern "C" JNIEXPORT jint JNICALL
+Java_com_squeakgames_aether_audio_AetherAudioEngine_nativeRingBufferSize(
+    JNIEnv* /* env */,
+    jobject /* thiz */) {
+    return static_cast<jint>(gCommandBuffer->size());
 }
