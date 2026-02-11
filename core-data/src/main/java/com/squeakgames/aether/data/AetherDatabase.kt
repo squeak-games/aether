@@ -6,14 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [CreatureEntity::class, BondGraphEntity::class],
-    version = 1,
+    entities = [CreatureEntity::class, BondGraphEntity::class, SessionEntity::class, AnchoredAssetEntity::class],
+    version = 2,
     exportSchema = false,
 )
 abstract class AetherDatabase : RoomDatabase() {
 
     abstract fun creatureDao(): CreatureDao
     abstract fun bondGraphDao(): BondGraphDao
+    abstract fun sessionDao(): SessionDao
+    abstract fun anchoredAssetDao(): AnchoredAssetDao
 
     companion object {
         @Volatile private var instance: AetherDatabase? = null
