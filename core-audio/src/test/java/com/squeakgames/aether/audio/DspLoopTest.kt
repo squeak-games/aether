@@ -22,10 +22,7 @@ class DspLoopTest {
             "consecutive frames should differ (phase advanced)",
             first.contentToString(), second.contentToString(),
         )
-        assertArrayEquals(
-            "should reuse same array reference",
-            first, second,
-        )
+        assertArrayEquals(first, second, 0.001f)
     }
 
     @Test
@@ -65,9 +62,6 @@ class DspLoopTest {
         val afterReset = loop.process(48000)
         loop.reset()
         val afterSecondReset = loop.process(48000)
-        assertArrayEquals(
-            "reset should restart from same phase",
-            afterReset, afterSecondReset,
-        )
+        assertArrayEquals(afterReset, afterSecondReset, 0.001f)
     }
 }

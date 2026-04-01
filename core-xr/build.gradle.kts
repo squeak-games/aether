@@ -29,6 +29,6 @@ dependencies {
     api(libs.androidx.xr.scenecore)
     implementation(libs.coroutines.core)
 
-    api(libs.junit)
+    testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
 }

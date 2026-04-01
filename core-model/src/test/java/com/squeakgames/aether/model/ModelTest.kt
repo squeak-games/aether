@@ -32,16 +32,26 @@ class ModelTest {
     }
 
     @Test
-    fun careAction_hasSixValues() {
+    fun careAction_hasFiveValues() {
         val values = CareAction.values()
-        assertEquals(6, values.size)
+        assertEquals(5, values.size)
         assertEquals(CareAction.OFFERING, values[0])
-        assertEquals(CareAction.OBSERVING_MUTUAL_AID, values[5])
+        assertEquals(CareAction.CALLING, values[4])
     }
 
     @Test
     fun careAction_offering_hasCorrectWeight() {
         assertEquals(0.05f, CareAction.OFFERING.weight, 0.001f)
+    }
+
+    @Test
+    fun environmentalContext_hasFourValues() {
+        val values = EnvironmentalContext.values()
+        assertEquals(4, values.size)
+        assertEquals(EnvironmentalContext.CALM, values[0])
+        assertEquals(EnvironmentalContext.BASELINE, values[1])
+        assertEquals(EnvironmentalContext.ELEVATED, values[2])
+        assertEquals(EnvironmentalContext.DISTRESS, values[3])
     }
 
     @Test

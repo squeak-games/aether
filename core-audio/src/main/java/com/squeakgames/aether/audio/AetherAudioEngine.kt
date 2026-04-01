@@ -6,18 +6,18 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class AetherAudioEngine {
 
-    private val _state = MutableStateFlow(AudioEngineState.STOPPED)
+    private val _state = MutableStateFlow(AudioEngineState.Idle)
     val state: StateFlow<AudioEngineState> = _state.asStateFlow()
 
     fun start(): Boolean {
         val ok = nativeStart()
-        _state.value = if (ok) AudioEngineState.PLAYING else AudioEngineState.ERROR
+        if (ok) _state.value = AudioEngineState.Running
         return ok
     }
 
     fun stop(): Boolean {
         val ok = nativeStop()
-        _state.value = if (ok) AudioEngineState.STOPPED else AudioEngineState.ERROR
+        if (ok) _state.value = AudioEngineState.Idle
         return ok
     }
 

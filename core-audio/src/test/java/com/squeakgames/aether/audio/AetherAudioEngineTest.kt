@@ -17,9 +17,9 @@ class AetherAudioEngineTest {
     }
 
     @Test
-    fun engine_startsStopped() {
+    fun engine_startsIdle() {
         val engine = AetherAudioEngine()
-        assertEquals(AudioEngineState.STOPPED, engine.state.value)
+        assertEquals(AudioEngineState.Idle, engine.state.value)
     }
 
     @Test
