@@ -1,6 +1,7 @@
 package com.squeakgames.aether.xr
 
 import androidx.xr.scenecore.SpatialCapabilities
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -44,8 +45,11 @@ class CapabilityDetectorTest {
     }
 
     @Test
-    fun headPose_nonZero_notOrigin() {
-        val pose = HeadTrackingStateProvider.HeadPose(x = 1f, y = 0f, z = 0f)
+    fun headPose_nonOrigin() {
+        val pose = HeadTrackingStateProvider.HeadPose(x = 1f, y = 2f, z = 3f)
         assertFalse(pose.isOrigin)
+        assertEquals(1f, pose.x, 0.001f)
+        assertEquals(2f, pose.y, 0.001f)
+        assertEquals(3f, pose.z, 0.001f)
     }
 }
