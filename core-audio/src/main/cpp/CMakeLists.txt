@@ -7,6 +7,10 @@ add_library(
     SHARED
     audio_engine.cpp
     RingBuffer.cpp
+    AdsrEnvelope.cpp
+    BiquadFilter.cpp
+    SpatialPanner.cpp
+    VoiceManager.cpp
 )
 
 target_include_directories(

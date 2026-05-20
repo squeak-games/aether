@@ -20,7 +20,11 @@ public:
     int size() const;
     int capacity() const { return capacity_; }
     bool empty() const { return size() == 0; }
-    bool full() const { return size() == capacity_; }
+    bool full() const {
+        int h = head_.load(std::memory_order_acquire);
+        int t = tail_.load(std::memory_order_acquire);
+        return advance(h) == t;
+    }
 
 private:
     int advance(int index) const { return (index + 1) % capacity_; }
