@@ -98,3 +98,10 @@ are the product surfaces.
 ---
 
 *Squeak Games Inc.*
+## v0.1.0
+
+First stable platform release. All four modules published:
+- `:core-audio` — Oboe JNI bridge with sine wave oscillator, lock-free ring buffer, zero-allocation DSP loop
+- `:core-data` — Room schemas for creature and bond graph persistence
+- `:core-model` — Shared enums, bond levels, species, care actions, creature profiles
+- `:core-xr` — Capability detection wrappers, head tracking provider, ProjectedTestRule
