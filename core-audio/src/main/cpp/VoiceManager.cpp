@@ -120,7 +120,7 @@ void VoiceManager::setMasterFilter(BiquadFilter::Type type, float cutoff, float 
 float VoiceManager::process(int32_t sampleRate) {
     float output = 0.0f;
 
-    for (auto* voice : voices_) {
+    for (auto& voice : voices_) {
         if (!voice) continue;
 
         float voiceSample = voice->process(sampleRate);

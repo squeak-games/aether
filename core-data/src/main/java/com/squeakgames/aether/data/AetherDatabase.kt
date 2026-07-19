@@ -26,7 +26,9 @@ abstract class AetherDatabase : RoomDatabase() {
                     context.applicationContext,
                     AetherDatabase::class.java,
                     DATABASE_NAME,
-                ).build().also { instance = it }
+                )
+                    .fallbackToDestructiveMigration()
+                    .build().also { instance = it }
             }
         }
 

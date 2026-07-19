@@ -10,7 +10,7 @@ plugins {
 val forbiddenNetworkLibraries = listOf(
     "okhttp3", "okhttp", "retrofit2", "retrofit",
     "com.squareup.okhttp", "com.squareup.retrofit",
-    "androidx.tony", "volley",
+    "ktor", "firebase", "volley",
 )
 
 tasks.register("privacyLint") {
@@ -24,14 +24,14 @@ tasks.register("privacyLint") {
             "testRuntimeClasspath",
         )
         val violations = mutableListOf<String>()
-        allprojects.forEach { project ->
-            project.configurations.matching { it.name in configs }.forEach { config ->
+        allprojects.forEach { p ->
+            p.configurations.matching { it.name in configs }.forEach { config ->
                 config.resolvedConfiguration.resolvedArtifacts
                     .mapNotNull { it.moduleVersion.id }
                     .forEach { id ->
                         val coord = "${id.group}:${id.name}"
                         if (forbiddenNetworkLibraries.any { coord.contains(it, ignoreCase = true) }) {
-                            violations.add("${project.path} [${config.name}]: $coord")
+                            violations.add("${p.path} [${config.name}]: $coord")
                         }
                     }
             }

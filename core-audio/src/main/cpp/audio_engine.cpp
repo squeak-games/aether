@@ -9,6 +9,7 @@ static RingBuffer* gCommandBuffer = new RingBuffer(kRingBufferCapacity);
 static VoiceManager* gVoiceManager = nullptr;
 static oboe::AudioStream* gStream = nullptr;
 static int32_t gSampleRate = 48000;
+static float gCurrentFrequency = 440.0f;
 
 class AudioCallback : public oboe::AudioStreamDataCallback {
 public:
@@ -85,6 +86,9 @@ Java_com_squeakgames_aether_audio_AetherAudioEngine_nativeStop(
     delete gAudioCallback;
     gAudioCallback = nullptr;
 
+    delete gVoiceManager;
+    gVoiceManager = nullptr;
+
     return result == oboe::Result::OK ? JNI_TRUE : JNI_FALSE;
 }
 
@@ -93,8 +97,8 @@ Java_com_squeakgames_aether_audio_AetherAudioEngine_nativeSetFrequency(
     JNIEnv* /* env */,
     jobject /* thiz */,
     jfloat hz) {
+    gCurrentFrequency = hz;
     if (gVoiceManager) {
-        // Update first active voice frequency
         VoiceParams params;
         params.frequency = hz;
         params.amplitude = 0.5f;
@@ -106,7 +110,7 @@ extern "C" JNIEXPORT jfloat JNICALL
 Java_com_squeakgames_aether_audio_AetherAudioEngine_nativeGetFrequency(
     JNIEnv* /* env */,
     jobject /* thiz */) {
-    return 440.0f;
+    return gCurrentFrequency;
 }
 
 extern "C" JNIEXPORT jstring JNICALL
